@@ -58,3 +58,11 @@ code {
 .cont {
     margin-top: 30px;
 }
+
+.jumbotron {
+    padding: 2rem 2rem;
+}
+
+.custom-container {
+    margin-bottom: 100px;
+}

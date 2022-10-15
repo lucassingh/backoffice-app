@@ -16,15 +16,15 @@ function Navbar() {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <p className="navbar-brand custom-p">
-                <Link className={"link-styles-brand"} to="/">Backoffice</Link>
-            </p>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
             <div className="container">
-                <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-                    <ul className="navbar-nav">
+                <p className="navbar-brand custom-p">
+                    <Link className={"link-styles-brand"} to="/">Backoffice</Link>
+                </p>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav ml-auto">
                         <li className="nav-item active">
                             <p className="nav-link custom-p"><span className="sr-only">(current)</span>
                                 <Link className={"link-styles"} to="/">Home</Link>
