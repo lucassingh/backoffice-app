@@ -1,21 +1,21 @@
 const router = require('express').Router();
-const Song = require('../models/song');
+const File = require('../models/file');
 
-//create song
+//create file
 router.post('/', async(req, res) => {
     try {
-        const song = await Song(req.body).save();
-        res.status(201).send({data: song, msg: 'upload song!'})
+        const file = await File(req.body).save();
+        res.status(201).send({data: file, msg: 'upload file!'})
     } catch (error) {
         res.status(500).send({msg: 'internal server error'})
     }
 })
 
-//get all Songs
+//get all files
 router.get('/', async(req, res) => {
     try {
-        const songs = await Song.find();
-        res.status(200).send({data: songs})
+        const files = await File.find();
+        res.status(200).send({data: files})
     } catch (error) {
         res.status(500).send({msg: 'internal server error'})
     }
