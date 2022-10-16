@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const SongForm = () => {
+const FileForm = () => {
 
     const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const SongForm = () => {
         name: "",
         category: "",
         artist: "",
-        song: "",
+        file: "",
         img: "",
     }
 
@@ -27,7 +27,7 @@ const SongForm = () => {
         name: "",
         category: "",
         artist: "",
-        song: "",
+        file: "",
         img: "",
     });
 
@@ -52,7 +52,7 @@ const SongForm = () => {
         }
 
         try {
-            const url = process.env.REACT_APP_API_URL + "/songs"
+            const url = process.env.REACT_APP_API_URL + "/files"
 
             if (captchaValue !== '') {
                 await axios.post(url, data);
@@ -83,12 +83,12 @@ const SongForm = () => {
                     <input
                         type="text"
                         className={styles.input}
-                        placeholder="Nombre podcast"
+                        placeholder="Nombre PDF"
                         name="name"
                         onChange={handleChange}
                         value={data.name}
                     />
-                    {error && data.name.length <= 0 ? <span className={styles.validation}>El nombre del podcast es requerido</span> : ''}
+                    {error && data.name.length <= 0 ? <span className={styles.validation}>El nombre del PDF es requerido</span> : ''}
 
 
                     <input
@@ -113,21 +113,21 @@ const SongForm = () => {
 
                     <FileInput
                         name="img"
-                        label="Imagen Podcast"
+                        label="Imagen PDF"
                         handleInputState={handleInputState}
                         type="image"
                         value={data.img}
                     />
-                    {error && data.img.length <= 0 ? <span className={styles.validation}>La imagen del podcast es requerida</span> : ''}
+                    {error && data.img.length <= 0 ? <span className={styles.validation}>La imagen del PDF es requerida</span> : ''}
 
                     <FileInput
-                        name="song"
-                        label="Archivo mp3"
+                        name="file"
+                        label="Archivo PDF"
                         handleInputState={handleInputState}
-                        type="audio"
-                        value={data.song}
+                        type="file"
+                        value={data.file}
                     />
-                    {error && data.song.length <= 0 ? <span className={styles.validation}>La imagen del podcast es requerida</span> : ''}
+                    {error && data.song.length <= 0 ? <span className={styles.validation}>El archivo PDF es requerido</span> : ''}
 
                     <div className="mt-4">
                         <ReCAPTCHA
@@ -138,7 +138,7 @@ const SongForm = () => {
 
                     <div className={styles.contButton}>
                         <button type="submit" className='btn btn-primary button-c'>
-                            Cargar mp3
+                            Cargar PDF
                         </button>
                     </div>
 
@@ -148,4 +148,4 @@ const SongForm = () => {
     );
 };
 
-export default SongForm;
+export default FileForm;
