@@ -3,6 +3,7 @@ import axios from 'axios';
 import FileInput from "../FileInput";
 import styles from "./styles.module.css";
 import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const SongForm = () => {
 
@@ -20,6 +21,8 @@ const SongForm = () => {
 
     const [display, setDisplay] = useState(false);
 
+    const [captchaValue, setCaptchaValue] = useState('');
+
     const [data, setData] = useState({
         name: "",
         category: "",
@@ -27,6 +30,10 @@ const SongForm = () => {
         song: "",
         img: "",
     });
+
+    const onChangeCaptcha = (value) => {
+        return setCaptchaValue(value)
+    }
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
@@ -46,12 +53,15 @@ const SongForm = () => {
 
         try {
             const url = process.env.REACT_APP_API_URL + "/songs"
-            await axios.post(url, data);
-            setData(initialValue);
-            setDisplay(true);
-            setTimeout(() => {                
-                navigate('/')
-            }, 3000);
+
+            if (captchaValue !== '') {
+                await axios.post(url, data);
+                setData(initialValue);
+                setDisplay(true);
+                setTimeout(() => {
+                    navigate('/')
+                }, 3000);
+            }
 
         } catch (error) {
             console.log(error)
@@ -69,7 +79,7 @@ const SongForm = () => {
             }
 
             <div className={styles.containerForm}>
-                <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                <form className={styles.form} onSubmit={handleSubmit} formNoValidate>
                     <input
                         type="text"
                         className={styles.input}
@@ -119,8 +129,15 @@ const SongForm = () => {
                     />
                     {error && data.song.length <= 0 ? <span className={styles.validation}>la imagen del podcast es requerida</span> : ''}
 
+                    <div className="mt-4">
+                        <ReCAPTCHA
+                            sitekey={process.env.REACT_APP_CAPTCHA_KEY}
+                            onChange={onChangeCaptcha}
+                        />
+                    </div>
+
                     <div className={styles.contButton}>
-                        <button type="submit" className='btn btn-primary' >
+                        <button type="submit" className='btn btn-primary button-c'>
                             Cargar
                         </button>
                     </div>
